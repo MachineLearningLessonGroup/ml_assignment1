@@ -8,11 +8,11 @@ def download(url:str) -> str:
     """如果文件尚未下载,则从url地址下载并返回文件名"""
     filename=url.split('/')[-1]
     if not os.path.exists(filename):
-        urllib.request.urlopen(url)
+        urllib.request.urlretrieve(url,filename)
     if os.path.exists(filename):
         print("文件{0}已准备完毕!".format(filename))
     else:
-        print("文件{0}尚未下载,请检查网络!".format(filename))
+        raise Exception('文件'+filename+'尚未下载,请检查网络!')
     return filename
 
 def dispose_data(url:str,dictionary:Dict[str,int]):
