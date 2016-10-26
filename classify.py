@@ -104,5 +104,5 @@ image_utils.plotTree(clf_tree, carSet)
 print("生成树状图car.dot完毕!")
 
 # 分离边界
-image_utils.plotDecisionSurface(carSet)
+image_utils.plotDecisionSurface(carSet, test_data, test_target)
 print("生成决策边界图完毕!")

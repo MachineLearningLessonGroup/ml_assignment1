@@ -15,7 +15,7 @@ def plotTree(clf_tree, carSet):
                              filled=True, rounded=True,
                              special_characters=True)
 
-def plotDecisionSurface(carSet):
+def plotDecisionSurface(carSet, test_data, test_target):
     n_classes = 4
     plot_colors = "bryg"
     plot_step = 0.02
@@ -61,6 +61,8 @@ def plotDecisionSurface(carSet):
                         cmap=plt.cm.Paired)
 
         plt.axis("tight")
+        score_tree = clf.score(test_data[:, pair], test_target)
+        print("{0}: 准确率{1}".format(pairidx, score_tree))
 
     plt.suptitle("Decision surface of a decision tree using paired features")
     plt.legend()
