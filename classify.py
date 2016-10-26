@@ -27,8 +27,6 @@ safety:   low, med, high.
 #数据链接:
 url="http://archive.ics.uci.edu/ml/machine-learning-databases/car/car.data"
 
-
-
 #进行数值化处理的dict:
 str2int={
     'vhigh':4,
