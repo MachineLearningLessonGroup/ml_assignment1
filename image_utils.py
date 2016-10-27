@@ -1,4 +1,5 @@
 #-*- coding:utf-8 -*-
+import random
 
 import numpy as np
 from sklearn import tree
@@ -18,7 +19,14 @@ def plotTree(clf_tree, carSet):
 def plotDecisionSurface(carSet, test_data, test_target):
     n_classes = 4
     plot_colors = "bryg"
-    plot_step = 0.02
+    plot_step = 0.01
+
+    # 随机添加一个随机浮点数,调节var可以控制变化幅度
+    var = 0.3
+    for i in range(len(carSet.target)):
+        for j in range(6):
+            carSet.data[i][j] = carSet.data[i][j] + random.uniform(-1*var, var)
+    print carSet.data
 
     for pairidx, pair in enumerate([[0, 1], [0, 2], [0, 3], [0, 4], [0, 5],
                                     [1, 2], [1, 3], [1, 4], [1, 5], [2, 3],
