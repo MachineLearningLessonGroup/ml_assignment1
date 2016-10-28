@@ -69,24 +69,39 @@ carSet = Bunch(data=dataArray, target=targetArray,
 
 print("决策树开始训练!")
 tree_train_start=time.time()
-clf_tree=DecisionTreeClassifier(\
-                    criterion='entropy', splitter='best', \
-                    max_depth=None, min_samples_split=1,\
-                     min_samples_leaf=1, min_weight_fraction_leaf=0.0,\
-                      max_features=None, random_state=42,\
-                       max_leaf_nodes=None,\
-                        class_weight=None, presort=False)
+clf_tree=DecisionTreeClassifier(
+                                criterion='entropy', 
+                                splitter='best', 
+                                max_depth=None,
+                                min_samples_split=1,
+                                min_samples_leaf=1,
+                                min_weight_fraction_leaf=0.0,
+                                max_features=None,
+                                random_state=42,
+                                max_leaf_nodes=None,
+                                class_weight=None,
+                                presort=False)
 clf_tree=clf_tree.fit(carSet.data, carSet.target)
 tree_train_time=time.time()-tree_train_start
 print("决策树训练结束!\n")
 
 print("SVM开始训练!")
 svm_train_start=time.time()
-clf_svm=SVC(C=1.0, kernel='rbf', degree=3, gamma='auto', \
-                    coef0=0.0, shrinking=True, probability=False,\
-                     tol=0.001, cache_size=200, class_weight=None,\
-                      verbose=False, max_iter=-1, \
-                      decision_function_shape=None, random_state=None)
+clf_svm=SVC(
+            C=3.0, 
+            kernel='rbf', 
+            degree=3, 
+            gamma='auto', 
+            coef0=0.0, 
+            shrinking=True, 
+            probability=False,
+            tol=0.001, 
+            cache_size=200, 
+            class_weight={0:9,1:2,2:4,3:5},
+            verbose=False, 
+            max_iter=-1, 
+            decision_function_shape=None, 
+            random_state=None)
 clf_svm=clf_svm.fit(carSet.data, carSet.target)
 svm_train_time=time.time()-svm_train_start
 print("SVM训练结束!\n")
@@ -97,7 +112,7 @@ score_svm=clf_svm.score(test_data,test_target)
 print("测试结束!\n")
 print("tree时间{0} 准确率{1}".format(tree_train_time*10000,score_tree))
 print("svm 时间{0} 准确率{1}".format(svm_train_time*10000,score_svm))
-
+#input("暂停: 回车继续/Ctrl-C退出")
 # 决策树可视化操作
 print("\n可视化操作:")
 image_utils.plotTree(clf_tree, carSet)
